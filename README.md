@@ -76,6 +76,25 @@ python manage.py runserver
 
 Health check: `GET http://127.0.0.1:8000/` → `{"status": "ok"}`
 
+By default the app uses the **public OSRM demo** (no key, internet
+required). Text inputs like `"Houston, TX"` are resolved by the **offline**
+ZIP geocoder first (instant, no network); Nominatim is only a fallback for
+free-form addresses.
+
+### Optional: run OSRM locally (offline, no rate limits)
+
+For a fully offline demo (or to avoid the public demo's rate limits), run
+OSRM in Docker — see `docker-compose.yml` for the one-time graph-prep
+commands (a regional extract such as Texas is ~700 MB, ~10 min). Then:
+
+```bash
+OSRM_DATA=./osrm-data docker compose up -d        # serves :5000
+echo "OSRM_BASE_URL=http://localhost:5000" >> .env
+```
+
+With a Texas extract + offline geocoding the API needs **zero internet**
+(e.g. `El Paso, TX` → `Houston, TX`, `Brownsville, TX` → `Amarillo, TX`).
+
 ## 5. Example requests
 
 ### A) Text locations

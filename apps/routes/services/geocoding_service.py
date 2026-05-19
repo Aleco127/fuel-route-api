@@ -28,7 +28,34 @@ class GeocodingError(Exception):
 
 
 def _cache_key(query: str) -> str:
-    return f"geocode:{query.strip().lower()}"
+    import hashlib
+
+    digest = hashlib.md5(query.strip().lower().encode()).hexdigest()
+    return f"geocode:{digest}"
+
+
+def _try_offline_city_state(query: str) -> tuple[float, float, str] | None:
+    """Resolve a "City, ST[, USA]" string from the offline ZIP dataset.
+
+    Returns (lat, lng, display) or None if the input is not a recognisable
+    city/state pair. No network. This is what makes the demo work offline.
+    """
+    from apps.fuel.services.offline_geocoder import geocode_city_state
+    from apps.fuel.services.us_centroids import STATE_CENTROIDS
+
+    parts = [p.strip() for p in query.split(",") if p.strip()]
+    if parts and parts[-1].upper() in {"USA", "US", "UNITED STATES"}:
+        parts = parts[:-1]
+    if len(parts) < 2:
+        return None
+    state = parts[-1].upper()
+    city = parts[-2]
+    if state not in STATE_CENTROIDS:
+        return None
+    point = geocode_city_state(city, state)
+    if point is None:
+        return None
+    return point[0], point[1], f"{city.title()}, {state}, USA (offline)"
 
 
 def geocode_text(query: str) -> tuple[float, float, str]:
@@ -53,6 +80,19 @@ def geocode_text(query: str) -> tuple[float, float, str]:
         result = (row.latitude, row.longitude, row.display_name)
         cache.set(key, result, _CACHE_TTL)
         return result
+
+    # Fast offline path: "City, ST" (the common demo input) is resolved from
+    # the bundled ZIP dataset with ZERO network calls. This keeps the API
+    # fully usable without internet and instant for typical inputs.
+    offline = _try_offline_city_state(query)
+    if offline is not None:
+        lat, lng, display = offline
+        GeocodeCache.objects.get_or_create(
+            query=query,
+            defaults={"latitude": lat, "longitude": lng, "display_name": display},
+        )
+        cache.set(key, (lat, lng, display), _CACHE_TTL)
+        return (lat, lng, display)
 
     url = f"{settings.NOMINATIM_BASE_URL.rstrip('/')}/search"
     params = {

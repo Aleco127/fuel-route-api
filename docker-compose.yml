@@ -1,0 +1,28 @@
+# Optional local OSRM routing server (no internet, no public-demo rate limits).
+#
+# Prepare the graph ONCE (downloads ~700 MB, ~10 min total), e.g. Texas:
+#
+#   mkdir osrm-data && cd osrm-data
+#   curl -L -o texas-latest.osm.pbf \
+#     https://download.geofabrik.de/north-america/us/texas-latest.osm.pbf
+#   docker run --rm -v "$PWD:/data" ghcr.io/project-osrm/osrm-backend \
+#     osrm-extract -p /opt/car.lua /data/texas-latest.osm.pbf
+#   docker run --rm -v "$PWD:/data" ghcr.io/project-osrm/osrm-backend \
+#     osrm-partition /data/texas-latest.osrm
+#   docker run --rm -v "$PWD:/data" ghcr.io/project-osrm/osrm-backend \
+#     osrm-customize /data/texas-latest.osrm
+#
+# Then:  OSRM_DATA=./osrm-data OSRM_PBF=texas-latest docker compose up -d
+# And set OSRM_BASE_URL=http://localhost:5000 in the app's .env
+# (use us-latest.osm.pbf instead of texas for nationwide routes).
+
+services:
+  osrm:
+    image: ghcr.io/project-osrm/osrm-backend
+    container_name: osrm-local
+    command: osrm-routed --algorithm mld /data/${OSRM_PBF:-texas-latest}.osrm
+    ports:
+      - "5000:5000"
+    volumes:
+      - ${OSRM_DATA:-./osrm-data}:/data
+    restart: unless-stopped
