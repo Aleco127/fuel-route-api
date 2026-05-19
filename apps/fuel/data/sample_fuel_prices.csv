@@ -1,0 +1,41 @@
+name,brand,address,city,state,latitude,longitude,price_per_gallon,source_id
+Ontario Travel Center,Pilot,1700 E Holt Blvd,Ontario,CA,34.0633,-117.6509,4.19,1001
+Indio Fuel Stop,Shell,82900 Indio Blvd,Indio,CA,33.7206,-116.2156,4.05,1002
+Blythe Highway Fuel,Chevron,1000 W Hobsonway,Blythe,CA,33.6178,-114.5883,3.98,1003
+Quartzsite Truck Plaza,Loves,1150 W Main St,Quartzsite,AZ,33.6639,-114.2300,3.62,1004
+Phoenix West Travel,TA,5101 W Latham St,Phoenix,AZ,33.4550,-112.0780,3.49,1005
+Casa Grande Fuel,Loves,1180 N Pinal Ave,Casa Grande,AZ,32.8795,-111.7574,3.41,1006
+Tucson Interstate Fuel,Pilot,7800 E Benson Hwy,Tucson,AZ,32.1600,-110.8200,3.39,1007
+Lordsburg Truck Stop,Flying J,110 E Motel Dr,Lordsburg,NM,32.3506,-108.7070,3.55,1008
+Las Cruces Travel Plaza,TA,2280 W Picacho Ave,Las Cruces,NM,32.3100,-106.8200,3.48,1009
+El Paso Eastside Fuel,Loves,1300 Horizon Blvd,El Paso,TX,31.7080,-106.2070,3.29,1010
+Van Horn Fuel Mart,Chevron,1900 W Broadway,Van Horn,TX,31.0410,-104.8380,3.44,1011
+Pecos River Truck Plaza,Pilot,4400 S Frontage Rd,Pecos,TX,31.3850,-103.5400,3.33,1012
+Monahans Quick Fuel,Shell,3700 W I-20,Monahans,TX,31.5900,-102.9200,3.36,1013
+Odessa Travel Center,Loves,7800 W I-20,Odessa,TX,31.8500,-102.4700,3.25,1014
+Midland Interstate Fuel,TA,4700 W I-20,Midland,TX,31.9700,-102.1500,3.27,1015
+Big Spring Fuel Stop,Flying J,1000 Hearn St,Big Spring,TX,32.2400,-101.4800,3.31,1016
+Sweetwater Truck Plaza,Pilot,1700 E Broadway,Sweetwater,TX,32.4700,-100.4100,3.30,1017
+Abilene West Fuel,Loves,2500 S Clack St,Abilene,TX,32.4200,-99.7700,3.22,1018
+Cisco Highway Fuel,Chevron,1100 I-20,Cisco,TX,32.3900,-98.9800,3.34,1019
+Weatherford Travel Center,TA,2700 Fort Worth Hwy,Weatherford,TX,32.7500,-97.8000,3.19,1020
+Fort Worth Loop Fuel,Shell,8900 South Fwy,Fort Worth,TX,32.6300,-97.3400,3.15,1021
+Dallas Gateway Fuel,Pilot,2300 S Industrial Blvd,Dallas,TX,32.7700,-96.8200,3.12,1022
+Fort Stockton Truck Plaza,Flying J,1502 N US-285,Fort Stockton,TX,30.8950,-102.8800,3.40,1023
+Ozona Fuel Mart,Chevron,1300 Sheffield Rd,Ozona,TX,30.7100,-101.2000,3.52,1024
+Sonora Highway Fuel,Shell,1100 N Service Rd,Sonora,TX,30.5700,-100.6400,3.50,1025
+Junction Travel Stop,Loves,2400 Main St,Junction,TX,30.4900,-99.7700,3.46,1026
+Kerrville Fuel Center,TA,1900 Sidney Baker St,Kerrville,TX,30.0500,-99.1400,3.43,1027
+San Antonio NW Fuel,Pilot,11400 I-10 W,San Antonio,TX,29.5800,-98.6100,3.20,1028
+Austin South Travel,Loves,4500 S I-35,Austin,TX,30.2070,-97.7740,3.24,1029
+Waco Interstate Fuel,Shell,1500 S I-35,Waco,TX,31.5200,-97.1400,3.18,1030
+Hillsboro Truck Plaza,Flying J,1000 I-35 E,Hillsboro,TX,32.0100,-97.1300,3.17,1031
+Corsicana Fuel Stop,Chevron,3200 W Hwy 22,Corsicana,TX,32.0950,-96.4700,3.21,1032
+Fairfield Highway Fuel,Shell,900 W Commerce St,Fairfield,TX,31.7200,-96.1600,3.26,1033
+Buffalo Travel Center,Loves,1200 N I-45,Buffalo,TX,31.4600,-96.0600,3.23,1034
+Madisonville Fuel Mart,Chevron,1900 E Main St,Madisonville,TX,30.9500,-95.9100,3.28,1035
+Huntsville Truck Plaza,Pilot,150 I-45 S,Huntsville,TX,30.7200,-95.5500,3.19,1036
+Conroe Interstate Fuel,TA,1400 N Loop 336,Conroe,TX,30.3100,-95.4600,3.14,1037
+Houston North Fuel,Shell,8800 North Fwy,Houston,TX,29.8800,-95.4100,3.09,1038
+Tucumcari Route Fuel,Loves,2200 E Route 66,Tucumcari,NM,35.1720,-103.6900,3.58,1039
+Amarillo West Travel,Pilot,8500 I-40 W,Amarillo,TX,35.1900,-101.9500,3.36,1040
