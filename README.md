@@ -209,5 +209,3 @@ All knobs (`CHECKPOINT_SPACING_MILES`, `STATION_SEARCH_RADIUS_MILES`,
   location. `--geocode` can refine via Nominatim if ever needed.
 * USA validity is a continental bounding box, not a polygon (Alaska/Hawaii
   out-of-box driving routes are not supported by OSRM anyway).
-
-See `LOOM_SCRIPT.md` for the 5-minute walkthrough.

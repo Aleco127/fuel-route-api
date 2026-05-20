@@ -1,0 +1,125 @@
+{
+  "info": {
+    "name": "Fuel Route API",
+    "description": "Assessment demo collection. POST /api/route-fuel-plan/ with start + finish (text or {lat,lng}).\n\nBase URL: http://127.0.0.1:8000\n\nSee LOOM_SCRIPT.md for the walkthrough.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "fuel-route-api-2026-05-19"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:8000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "0. Health check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/",
+          "host": ["{{baseUrl}}"],
+          "path": [""]
+        },
+        "description": "Sanity check. Should return {\"status\":\"ok\",\"service\":\"fuel-route-api\"}."
+      }
+    },
+    {
+      "name": "A. Brownsville -> Amarillo (long, 2 stops)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"start\": \"Brownsville, TX\",\n  \"finish\": \"Amarillo, TX\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/route-fuel-plan/",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "route-fuel-plan", ""]
+        },
+        "description": "Headline demo: ~778 mi, exceeds the 500-mi tank, so the optimizer picks 2 cheapest reachable stations. Expected total ~ $217."
+      }
+    },
+    {
+      "name": "B. Dallas -> Houston (short, 1 stop)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"start\": \"Dallas, TX\",\n  \"finish\": \"Houston, TX\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/route-fuel-plan/",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "route-fuel-plan", ""]
+        },
+        "description": "Short route: ~240 mi, 1 stop. Expected total ~ $66."
+      }
+    },
+    {
+      "name": "C. El Paso -> Houston (coordinates, 0 geocoding)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"start\": { \"lat\": 31.7619, \"lng\": -106.4850 },\n  \"finish\": { \"lat\": 29.7604, \"lng\": -95.3698 }\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/route-fuel-plan/",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "route-fuel-plan", ""]
+        },
+        "description": "Coordinates path: skips geocoding entirely. ~743 mi, 1 stop. Expected total ~ $217."
+      }
+    },
+    {
+      "name": "D. Error - out of USA (400)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"start\": \"Toronto, ON, Canada\",\n  \"finish\": \"Dallas, TX\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/route-fuel-plan/",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "route-fuel-plan", ""]
+        },
+        "description": "Validation: location outside the USA bounding box returns HTTP 400."
+      }
+    },
+    {
+      "name": "E. Error - missing finish (400)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"start\": \"Dallas, TX\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/route-fuel-plan/",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "route-fuel-plan", ""]
+        },
+        "description": "Validation: missing required field returns HTTP 400."
+      }
+    }
+  ]
+}
